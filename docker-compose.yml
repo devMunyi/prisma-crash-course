@@ -1,10 +1,10 @@
 version: '3'
 services:
-  db: 
+  db:
     image: postgres
     restart: always
     volumes:
-      - ./data/db/:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
@@ -17,3 +17,6 @@ services:
     restart: always
     ports:
       - 8082:8080
+
+volumes:
+  postgres_data:
