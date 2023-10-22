@@ -1,0 +1,47 @@
+Setting up NextJs with Prisma
+1) Initialize NextJs Project: 
+npx create-next-app@latest or npx create-next-app@<specific_version>
+
+2) Setting Up Prisma 
+2.1) Install Prisma Dev Dependency
+npm i -D prisma 
+
+2.2) Install Project Dependency
+npm i @prisma/client
+
+2.3) Initialize Prisma 
+npx prisma init
+
+Data Model
+1) Introspection: 
+- Allow use prisma with an existing database and tables
+- Then run the following command to create models with existing schema
+    npx prisma db pull
+
+2) Migration 
+- No exixting tables 
+- We define models ourselves then run migrations
+- Tables are then created based on the defined models
+
+NOTE: In defining model we use prisma types and not typescript types
+- Types in prisma are capitalized e.g Int, String, Boolean, Float etc
+- We use single @ when we are modifying behavior of a field/column
+- We use double @@ when we are modifying behavior of a model 
+- map attribute is used to change/specify name to be used in the 
+database if it should be different from one defined on prisma model
+- We can use prisma studio to manage model instead of adminer by
+running:
+    npx prisma studio
+- Running above command spins up prisma studio localhost port 5555 hence 
+you can access the interface on the broweser
+
+
+Relationships
+1) One to one
+2) One to Many
+3) Many to Many
+- For this one prisma support explict and implict
+a) explicit => you create a joint/pivot table between the two tables 
+b) implicit => you don't need to create joint table. Prism automatically 
+create one for us and no need to use @relation attribute to 
+mape the two tables
