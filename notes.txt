@@ -45,3 +45,42 @@ a) explicit => you create a joint/pivot table between the two tables
 b) implicit => you don't need to create joint table. Prism automatically 
 create one for us and no need to use @relation attribute to 
 mape the two tables
+
+Making API Calls/ Fetching Data
+- Ensure @prisma/client is installed as a project Dependency
+- Create src/lib/prisma.ts and add the following lines of code:
+    import { PrismaClient } from "@prisma/client";
+
+    const globalForPrisma = global as unknown as { prisma: PrismaClient };
+
+    export const prisma = globalForPrisma.prisma || new PrismaClient();
+
+    if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+
+    export default prisma;
+
+
+Seeding Data 
+- Create seed.ts inside prisma directory.
+- Add logic for inserting data complying witht the model 
+- Navigate to package.json and add the following:
+    "prisma": {
+        "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    },
+- Ensure ts-node is installed.
+- Then run a command:
+    npx prisma db seed
+- Reference: https://www.prisma.io/docs/guides/migrate/seed-database
+
+
+Filters
+- Commonly used: 
+where, startsWith, endsWith, gt (for greater than), gte(for greater than or equal)
+in
+
+
+Relation Filters (One-to-Many && Many-to-Many)
+- Commonly used are:
+1) every
+2) some 
+3) none
