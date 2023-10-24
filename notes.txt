@@ -79,8 +79,34 @@ where, startsWith, endsWith, gt (for greater than), gte(for greater than or equa
 in
 
 
-Relation Filters (One-to-Many && Many-to-Many)
+Relation Filters 
+a) One-to-Many && Many-to-Many
 - Commonly used are:
 1) every
 2) some 
 3) none
+
+b) Many-to-One && One-to-One
+1) is 
+2) isNot
+
+
+Selecting Specific Fields 
+- We use select attribute 
+- Note we can not use select and include on the same level
+
+
+Aggregation Functions
+- count 
+- sum
+- avg
+- max
+- min 
+
+
+Sorting
+- We use orderBy with asc or desc
+
+Pagination
+- Offset Based 
+- Cursor Based

@@ -1,26 +1,53 @@
 import prisma from "@/lib/prisma";
 
 export async function GET(){
+    // const posts = await prisma.post.findMany({
+    //     where: {
+    //         OR:[
+    //             {
+    //                 title: {
+    //                     contains: "Twitter",
+    //                     mode: "insensitive"
+    //                 }
+    //             },
+    //             {
+    //                 title: {
+    //                     contains: "github",
+    //                     mode: "insensitive"
+    //                 }
+    //             }
+    //         ],
+    //         AND: {
+    //             published: true
+    //         }
+    //     }
+    // });
+
     const posts = await prisma.post.findMany({
         where: {
-            OR:[
-                {
-                    title: {
-                        contains: "Twitter",
+            author: {
+                isNot: {
+                    name: {
+                        contains: "jack",
                         mode: "insensitive"
                     }
                 },
-                {
-                    title: {
-                        contains: "github",
-                        mode: "insensitive"
-                    }
+                is: {
+                    role: "ADMIN"
                 }
-            ],
-            AND: {
-                published: true
+            },
+        },
+        select: {
+            id: true,
+            title: true,
+            author: {
+                select: {
+                    id: true, 
+                    name: true
+                }
             }
         }
-    });
+    })
+
     return new Response(JSON.stringify(posts));
 }

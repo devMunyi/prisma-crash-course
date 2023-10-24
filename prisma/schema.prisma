@@ -39,6 +39,7 @@ model Post {
   id          Int        @id @default(autoincrement())
   title       String
   description String
+  likeNum     Int        @default(0) @map("like_num")
   authorId    Int
   author      User       @relation(fields: [authorId], references: [id])
   createdAt   DateTime   @default(now()) @map("created_at")
