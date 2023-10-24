@@ -25,7 +25,13 @@ export async function GET(request: Request) {
                         } 
                     }
                 }
-            ]
+            ],
+            AND: {
+                published: false,
+                id: {
+                    gt: 0
+                }
+            }
         },
         orderBy: {
             id: 'asc'
